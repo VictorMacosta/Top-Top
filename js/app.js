@@ -80,5 +80,10 @@ const valorCarrito = () =>{
 }
 alert('gracias por su compra su total es de $' + valorCarrito())
 
+alert('te mostrare por consola los productos')
+Carrito.forEach(producto =>{
+    console.log(producto)
+})
+
 
 // Mauro, como estas? todavia me cuesta muchisimo imginar una respuesta a los problemas que me aparecen con los conocimientos que tengo. no se que hacer para tener mas idea de como deberia resolver las situaciones que se me presentan en el codigo. 
