@@ -1,21 +1,19 @@
-// lo que voy a hacer es empezar a crear objetos paraa luego crear y especificar cada zapatillas de manera mas eficiente. 
-// por el momento no se que tipo de bucle voy a crear para que haga no se que cosa... estoy un poco jodido porqueno se que es lo que hare jajaj
-
 // voy a hacer una copia de la pagina elclubdelsweater es linda y tinen buenos precios. Me caen bien.
 
 class Productos {
-    constructor(id, nombre, talle, color, precio,){
+    constructor(id, nombre, imagen, talle, color, precio,){
         this.id = id;
         this.nombre = nombre;
+        this.imagen = imagen;
         this. talle = talle;
         this.color = color;
         this. precio = precio;
     }
 }
-const p1 = new Productos(01, 'remera manga larga mil pintas', ['s, m, l,'], 'gray', 1950)
-const p2 = new Productos(02, 'remera manga larga textura', ['s, m, l,'], 'black', 1950)
-const p3 = new Productos(03, 'remera manga larga', ['s, m, l,'], 'white', 1950)
-const p4 = new Productos(04, 'sweater Diesel', ['s, m, l,'], 'gray', 5850)
+const p1 = new Productos(01, 'milpintas','img/remera-manga-larga-gray-pintitas.jpg', ['s, m, l,'], 'gray', 1950)
+const p2 = new Productos(02, 'textura', 'img/remera-manga-larga-textura-black.jpg', ['s, m, l,'], 'black', 1950)
+const p3 = new Productos(03, 'white', 'img/remera-manga-larga-white.jpg', ['s, m, l,'], 'white', 1950)
+const p4 = new Productos(04, 'sweater', 'img/sweater-diesel.jpg', ['s, m, l,'], 'gray', 5850)
 
 const Remera = [p1, p2, p3]
 const Sweater = [p4]
@@ -26,33 +24,21 @@ function eleccion (){
 let bienvenido = prompt('remera o sweater, ¿que te interesa ver?').toLowerCase()
 switch (bienvenido) {
     case 'remera':
-        let elejiremera = prompt('estas son las remeras disponibles: milPintas, textura, white')
-        
-        switch (elejiremera) {
-            case 'milPintas':
-                prompt('¿que talle buscabas, ' + p1.talle + ' ?')
-                Carrito.push(p1)
-                break;
-        
-            case 'textura':
-                prompt('¿que talle buscabas, ' + p2.talle + ' ?')
-                Carrito.push(p2)
-                break;
-        
-            case 'white':
-                prompt('¿que talle buscabas, ' + p3.talle + ' ?')
-                Carrito.push(p3)
-                break;
-        
-            default:
-                alert('el articulo ingresado no se encuentra en stock')
-                break;
+        let elejiremera = prompt('estas son las remeras disponibles: milpintas, textura, white').toLowerCase()
+        let remera = Remera.find(element => element.nombre == elejiremera)
+        if(remera){
+            prompt('que talle buscabas: ' + remera.talle + ' ?')
+            Carrito.push(remera)
         }
         break;
 
     case 'sweater':
-        prompt('¿que talle buscabas, ' + p4.talle + ' ?')
-        Carrito.push(p4)
+    let elijesweater = prompt('estos son los que tenemos en stock: "sweater"').toLowerCase()
+    let sweater = Sweater.find(element => element.nombre == elijesweater)
+    if(sweater){
+        prompt('que talle buscas: ' + sweater.talle + ' ?')
+        Carrito.push(sweater)
+    }
         break;
 
     default:
@@ -64,26 +50,65 @@ if (confirm('desea seguir comprando?')){
 }
 }
 
-eleccion()
-
-console.log(Carrito)
 
 
 
+// adicion de cartas desde el documento js
 
-const valorCarrito = () =>{
-    let valorCarrito = 0
-    for(const producto of Carrito){
-        valorCarrito += producto.precio
+const primersection = document.querySelector('.contenedor')
+Remera.forEach((producto) =>{
+    const remeritas = document.createElement('div')
+    remeritas.innerHTML =`
+    <figure>
+        <img src="${producto.imagen}">
+        </figure>
+        <div class="contenido">
+        <h3>remera ${producto.nombre}</h3>
+        <p><spam>${producto.precio}</spam></p>
+        <a href="#">comprar</a>
+        </div>
+        `
+        remeritas.className = 'card'
+        primersection.append(remeritas)
+    })
+    
+    const segSection = document.querySelector('.contenedor')
+    Sweater.forEach((producto) =>{
+        const sweaters = document.createElement('div')
+        sweaters.innerHTML = `
+        <figure>
+        <img src="${producto.imagen}">
+        </figure>
+        <div class="contenido">
+        <h3>${producto.nombre}</h3>
+        <p><spam>${producto.precio}</spam></p>
+        <a href="#">comprar</a>
+        </div>
+        `
+        sweaters.className = 'card'
+        segSection.append(sweaters)
+    })
+    
+    eleccion()
+    
+    console.log(Carrito)
+    
+    
+    
+    
+    const valorCarrito = () =>{
+        let valorCarrito = 0
+        for(const producto of Carrito){
+            valorCarrito += producto.precio
+        }
+        return valorCarrito
     }
-    return valorCarrito
-}
-alert('gracias por su compra su total es de $' + valorCarrito())
-
-alert('te mostrare por consola los productos')
-Carrito.forEach(producto =>{
-    console.log(producto)
-})
-
-
+    alert('gracias por su compra su total es de $' + valorCarrito())
+    
+    alert('te mostrare por consola los productos')
+    Carrito.forEach(producto =>{
+        console.log(producto)
+    })
+    
+    
 // Mauro, como estas? todavia me cuesta muchisimo imginar una respuesta a los problemas que me aparecen con los conocimientos que tengo. no se que hacer para tener mas idea de como deberia resolver las situaciones que se me presentan en el codigo. 
