@@ -60,12 +60,12 @@ Remera.forEach((producto) =>{
     const remeritas = document.createElement('div')
     remeritas.innerHTML =`
     <figure>
-        <img src="${producto.imagen}">
+        // <img src="${producto.imagen}">
         </figure>
         <div class="contenido">
         <h3>remera ${producto.nombre}</h3>
         <p><spam>${producto.precio}</spam></p>
-        <a href="#">comprar</a>
+        <botton class ="btn" data-id ="${producto.nombre}">comprar</botton>
         </div>
         `
         remeritas.className = 'card'
@@ -77,22 +77,52 @@ Remera.forEach((producto) =>{
         const sweaters = document.createElement('div')
         sweaters.innerHTML = `
         <figure>
-        <img src="${producto.imagen}">
+        // <img src="${producto.imagen}">
         </figure>
         <div class="contenido">
         <h3>${producto.nombre}</h3>
         <p><spam>${producto.precio}</spam></p>
-        <a href="#">comprar</a>
+        <botton class ="btn" data-id ="${producto.nombre}">comprar</botton>
         </div>
         `
         sweaters.className = 'card'
         segSection.append(sweaters)
     })
     
-    eleccion()
+    // eleccion()
     
-    console.log(Carrito)
+    // console.log(Carrito)
     
+// aplicacion de liseners 
+
+
+
+
+
+const talle = (evento) =>{
+console.log(evento.target)
+    const productoElijido = evento.target.getattribute('data-id')
+    // console.log(productoElijido)
+}
+console.log(Carrito)
+    // Remera.forEach((remeras) =>{
+    //     prompt('que talle buscabas: ' + remeras.talle + ' ?')
+    // })
+    // for(talle of loque);
+
+
+
+
+const btnCompra = document.querySelectorAll('.btn')
+btnCompra.forEach((boton) =>{
+    boton.addEventListener('click', talle )
+})
+
+// console.log(Carrito)
+
+
+
+
     
     
     

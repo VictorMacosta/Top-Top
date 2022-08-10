@@ -47,7 +47,7 @@ body {
   font-weight: 400;
   margin-bottom: 15px; }
 
-.card .contenido a {
+.card .contenido .btn{
   text-decoration: none;
   display: inline-block;
   margin-top: 10px;
@@ -57,6 +57,6 @@ body {
   border-radius: 4px;
   transition: all 400ms ease; }
 
-.card .contenido a:hover {
+.card .contenido .btn:hover{
   background: #2fb4cc;
   color: #fff; }
