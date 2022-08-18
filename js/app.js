@@ -44,27 +44,33 @@ allproductos.forEach((producto) =>{
         primersection.append(cadaproducto)
     })
 
-    Carrito.forEach((producto)=>{
-        const porcadaproducto = document.createElement('div')
-        porcadaproducto.innerHTML = `
+
+
+
+
+
+    carritoProducto = () =>{
+        Carrito.forEach((producto)=>{
+            const porcadaproducto = document.createElement('div')
+            porcadaproducto.innerHTML = `
             <figure class = "padreimg">
-                <img src="">
+                <img src="${producto.imagen}">
             </figure>
             <div class = "showdes">
                 <ul>
-                    <li>hola</li>
-                    <li>como</li>
-                    <li>estas</li>
+                <li>${producto.nombre}</li>
+                <li>${producto.id}</li>
+                <li>${producto.precio}</li>
                 </ul>
-                    
+            
             </div>
             
-        `
-        porcadaproducto.className = 'cardEnElCarrito'
-        modal.append(porcadaproducto)
-    
-    })
-
+            `
+            porcadaproducto.className = 'cardEnElCarrito'
+            modal.append(porcadaproducto)
+        })
+    }
+        
 // const rederizoDatos = () =>{
 //     const pantallaDatos = document.querySelector('.pantallaDatos')
 //     allproductos.forEach((producto) => {
@@ -82,7 +88,6 @@ allproductos.forEach((producto) =>{
     const rederizarVentana = document.querySelector('.open')
 
     const modalContainer = document.querySelector('.modalContainer')
-
     const modal = document.querySelector('.modal')
 
     const cierroVentana = document.querySelector('.close')
@@ -101,6 +106,12 @@ allproductos.forEach((producto) =>{
 
 // FUNCIONES
 
+const guardarDatos = () =>{
+    if(localStorage.setItem('suCompra', JSON.stringify(Carrito))){
+    Carrito = JSON.parse(localStorage.getItem(Carrito))
+}
+carritoProducto()
+}
 const productoElegido = (evento) =>{
     const productoDatos = evento.target.getAttribute('data-id')
     const laSelcion = allproductos.find((producto) => producto.id == productoDatos)
@@ -108,8 +119,9 @@ const productoElegido = (evento) =>{
         const pedirTalle = laSelcion.talle
         prompt('estas son los talles disponibles ' + pedirTalle)
         Carrito.push(laSelcion)
+        guardarDatos()
+        console.log(Carrito)
     }
-    console.log(Carrito)
     }
     
     btnCompra.forEach((boton) =>{
@@ -128,6 +140,17 @@ const productoElegido = (evento) =>{
         return valorCarrito
     }
     
+    // agregando un storage de las compras 
+
+
+
+
+
+
+
+
+
+
     
     // EventListeners
     
