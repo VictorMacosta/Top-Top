@@ -32,12 +32,12 @@ allproductos.forEach((producto) =>{
     const cadaproducto = document.createElement('div')
     cadaproducto.innerHTML = `
         <figure>
-        <img src= "${producto.imagen}">
+        <img src= "${producto?.imagen}">
         </figure>
         <div class="contenido">
-        <h3>${producto.nombre}</h3>
-        <p><spam>${producto.precio}</spam></p>
-        <botton class ="btn" data-id ="${producto.id}">comprar</botton>
+        <h3>${producto?.nombre}</h3>
+        <p><spam>${producto?.precio}</spam></p>
+        <botton class ="btn" data-id ="${producto?.id}">comprar</botton>
         </div>
         `
         cadaproducto.className = 'card'
@@ -50,6 +50,8 @@ allproductos.forEach((producto) =>{
 
 
     carritoProducto = () =>{
+        const porcadaproducto = document.createElement('div')
+        porcadaproducto.innerHTML = ``
         Carrito.forEach((producto)=>{
             const porcadaproducto = document.createElement('div')
             porcadaproducto.innerHTML = `
@@ -58,9 +60,9 @@ allproductos.forEach((producto) =>{
             </figure>
             <div class = "showdes">
                 <ul>
-                <li>${producto.nombre}</li>
-                <li>${producto.id}</li>
-                <li>${producto.precio}</li>
+                <li>${producto?.nombre}</li>
+                <li>${producto?.id}</li>
+                <li>${producto?.precio}</li>
                 </ul>
             
             </div>
@@ -70,30 +72,16 @@ allproductos.forEach((producto) =>{
             modal.append(porcadaproducto)
         })
     }
-        
-// const rederizoDatos = () =>{
-//     const pantallaDatos = document.querySelector('.pantallaDatos')
-//     allproductos.forEach((producto) => {
-//         const cadaproducto = document.createElement('div')
-//         cadaproducto.innerHTML`
-
-//         `
-//         cadaproducto.className = 'pantallaARenderizar'
-//         primersection.append(cadaproducto)
-//     })
-// }
 
     const btnCompra = document.querySelectorAll('.btn')
 
     const rederizarVentana = document.querySelector('.open')
 
     const modalContainer = document.querySelector('.modalContainer')
+
     const modal = document.querySelector('.modal')
 
     const cierroVentana = document.querySelector('.close')
-
-    
-
 
     const examinarCarrito = document.querySelector('.buttonCarri')
 
@@ -107,9 +95,7 @@ allproductos.forEach((producto) =>{
 // FUNCIONES
 
 const guardarDatos = () =>{
-    if(localStorage.setItem('suCompra', JSON.stringify(Carrito))){
-    Carrito = JSON.parse(localStorage.getItem(Carrito))
-}
+    localStorage.setItem('suCompra', JSON.stringify(Carrito)) ? Carrito = JSON.parse(localStorage.getItem(Carrito)) : Carrito 
 carritoProducto()
 }
 const productoElegido = (evento) =>{
@@ -119,7 +105,8 @@ const productoElegido = (evento) =>{
         const pedirTalle = laSelcion.talle
         prompt('estas son los talles disponibles ' + pedirTalle)
         Carrito.push(laSelcion)
-        guardarDatos()
+        carritoProducto()
+        // guardarDatos()
         console.log(Carrito)
     }
     }
