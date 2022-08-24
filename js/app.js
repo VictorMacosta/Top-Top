@@ -53,7 +53,6 @@ allproductos.forEach((producto) =>{
         const porcadaproducto = document.createElement('div')
         porcadaproducto.innerHTML = ``
         Carrito.forEach((producto)=>{
-            const porcadaproducto = document.createElement('div')
             porcadaproducto.innerHTML = `
             <figure class = "padreimg">
                 <img src="${producto.imagen}">
@@ -74,6 +73,8 @@ allproductos.forEach((producto) =>{
     }
 
     const btnCompra = document.querySelectorAll('.btn')
+
+    const showImg = document.querySelectorAll('img')
 
     const rederizarVentana = document.querySelector('.open')
 
@@ -100,16 +101,68 @@ carritoProducto()
 }
 const productoElegido = (evento) =>{
     const productoDatos = evento.target.getAttribute('data-id')
-    const laSelcion = allproductos.find((producto) => producto.id == productoDatos)
-    if(laSelcion){
-        const pedirTalle = laSelcion.talle
-        prompt('estas son los talles disponibles ' + pedirTalle)
-        Carrito.push(laSelcion)
+    const laSeleccion = allproductos.find((producto) => producto.id == productoDatos)
+    if(laSeleccion){
+            const { value: talle } = Swal.fire({
+                title: 'Por favor elije un talle',
+                input: 'select',
+                inputOptions: {
+                'Talles': {
+                    s: 's',
+                    m: 'm',
+                    l: 'l',  
+                },
+                },
+                inputPlaceholder: 'elije un talle',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                return new Promise((resolve) => {
+                    if (value === 's' || 'm' || 'l') {
+                    resolve()
+                    } else {
+                    resolve('You need to select a zise :)')
+                    }
+                })
+                }
+            })
+            if (talle) {
+                Swal.fire(`You selected: ${talle}`)
+            }
+                // Swal.fire({
+                //     title: 'Cuantas quieres llevar?',
+                //     icon: 'question',
+                //     input: 'range',
+                //     inputLabel: 'cantidad',
+                //     inputAttributes: {
+                //     min: 1,
+                //     max: 10,
+                //     step: 1
+                //     },
+                //     inputValue: 1
+                // })
+        Carrito.push(laSeleccion)
         carritoProducto()
         // guardarDatos()
         console.log(Carrito)
     }
     }
+    const fotoMuestra = (imagen) =>{
+        const imagenDato = imagen.target 
+            Swal.fire({
+            title: 'Sweet!',
+            text: 'Modal with a custom image.',
+            imageUrl: imagenDato,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            })
+        console.log(imagenDato)
+    }
+    showImg.forEach((foto)=>{
+        foto.addEventListener ('click', fotoMuestra)
+
+        })
+        
     
     btnCompra.forEach((boton) =>{
         boton.addEventListener('click', productoElegido )
