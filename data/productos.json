@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "nombre": "milpintas",
+        "imagen": "img/remera-manga-larga-gray-pintitas.jpeg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "gray",
+        "precio": 1950
+    },
+    {
+        "id": 2,
+        "nombre": "textura",
+        "imagen": "img/remera-manga-larga-textura-black.jpeg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "black",
+        "precio": 1950
+    },
+    {
+        "id": 3,
+        "nombre": "white",
+        "imagen": "img/remera-manga-larga-white.jpeg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "white",
+        "precio": 1950
+    },
+    {
+        "id": 4,
+        "nombre": "sweater",
+        "imagen": "img/sweater-diesel.jpeg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "gray",
+        "precio": 5850
+    },
+    {
+        "id": 5,
+        "nombre": "infinit",
+        "imagen": "img/sweater-infinit-puntos.jpeg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "gris",
+        "precio": 6400
+    },
+    {
+        "id": 6,
+        "nombre": "jack rayado",
+        "imagen": "img/sweater-rayado-jack.jpg",
+        "talle": [
+            "s, m, l,"
+        ],
+        "color": "claro",
+        "precio": 7000
+    }
+]

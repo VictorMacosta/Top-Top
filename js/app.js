@@ -3,28 +3,34 @@
 
 //DATOS de la pagina 
 
-class Productos {
-    constructor(id, nombre, imagen, talle, color, precio,){
-        this.id = id;
-        this.nombre = nombre;
-        this.imagen = imagen;
-        this.talle = talle;
-        this.color = color;
-        this.precio = precio;
-    }
-}
-const p1 = new Productos(01, 'milpintas', 'img/remera-manga-larga-gray-pintitas.jpeg', ['s, m, l,'], 'gray', 1950)
-const p2 = new Productos(02, 'textura', 'img/remera-manga-larga-textura-black.jpeg', ['s, m, l,'], 'black', 1950)
-const p3 = new Productos(03, 'white', 'img/remera-manga-larga-white.jpeg', ['s, m, l,'], 'white', 1950)
-const p4 = new Productos(04, 'sweater', 'img/sweater-diesel.jpeg', ['s, m, l,'], 'gray', 5850)
-const p5 = new Productos(05, 'infinit', 'img/sweater-infinit-puntos.jpeg', ['s, m, l,'], 'gris', 6400 )
-const p6 = new Productos(06, 'jack rayado','img/sweater-rayado-jack.jpg',['s, m, l,'], 'claro', 7000)
+// class Productos {
+//     constructor(id, nombre, imagen, talle, color, precio,){
+//         this.id = id;
+//         this.nombre = nombre;
+//         this.imagen = imagen;
+//         this.talle = talle;
+//         this.color = color;
+//         this.precio = precio;
+//     }
+// }
+// const p1 = new Productos(01, 'milpintas', 'img/remera-manga-larga-gray-pintitas.jpeg', ['s, m, l,'], 'gray', 1950)
+// const p2 = new Productos(02, 'textura', 'img/remera-manga-larga-textura-black.jpeg', ['s, m, l,'], 'black', 1950)
+// const p3 = new Productos(03, 'white', 'img/remera-manga-larga-white.jpeg', ['s, m, l,'], 'white', 1950)
+// const p4 = new Productos(04, 'sweater', 'img/sweater-diesel.jpeg', ['s, m, l,'], 'gray', 5850)
+// const p5 = new Productos(05, 'infinit', 'img/sweater-infinit-puntos.jpeg', ['s, m, l,'], 'gris', 6400 )
+// const p6 = new Productos(06, 'jack rayado','img/sweater-rayado-jack.jpg',['s, m, l,'], 'claro', 7000)
+
 // DECLARACIONES
 
-const allproductos = [p1, p2, p3, p4, p5, p6]
+let allproductos = []
 let Carrito = []
 
-// ajuste del dom
+fetch('../data/productos.json')
+    .then((Response) => Response.json())
+    .then((respuesta) =>{
+        respuesta = allproductos
+        guardarDatos()
+    })
 // adicion de cartas desde el documento js
 
 const primersection = document.querySelector('.contenedor')
@@ -43,11 +49,6 @@ allproductos.forEach((producto) =>{
         cadaproducto.className = 'card'
         primersection.append(cadaproducto)
     })
-
-
-
-
-
 
     carritoProducto = () =>{
         const porcadaproducto = document.createElement('div')
@@ -182,49 +183,14 @@ const productoElegido = (evento) =>{
     
     // agregando un storage de las compras 
 
-
-
-
-
-
-
-
-
-
     
     // EventListeners
     
 
-
-
-
-
 // Ejecuciones
 
 
-
-
-
-
 // aplicacion de liseners 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // alert('gracias por su compra su total es de $' + valorCarrito())
@@ -235,4 +201,3 @@ const productoElegido = (evento) =>{
     // })
     
     
-// Mauro, como estas? todavia me cuesta muchisimo imginar una respuesta a los problemas que me aparecen con los conocimientos que tengo. no se que hacer para tener mas idea de como deberia resolver las situaciones que se me presentan en el codigo. 
