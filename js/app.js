@@ -1,42 +1,25 @@
 // voy a hacer una copia de la pagina elclubdelsweater es linda y tinen buenos precios. Me caen bien.
 
-
-//DATOS de la pagina 
-
-// class Productos {
-//     constructor(id, nombre, imagen, talle, color, precio,){
-//         this.id = id;
-//         this.nombre = nombre;
-//         this.imagen = imagen;
-//         this.talle = talle;
-//         this.color = color;
-//         this.precio = precio;
-//     }
-// }
-// const p1 = new Productos(01, 'milpintas', 'img/remera-manga-larga-gray-pintitas.jpeg', ['s, m, l,'], 'gray', 1950)
-// const p2 = new Productos(02, 'textura', 'img/remera-manga-larga-textura-black.jpeg', ['s, m, l,'], 'black', 1950)
-// const p3 = new Productos(03, 'white', 'img/remera-manga-larga-white.jpeg', ['s, m, l,'], 'white', 1950)
-// const p4 = new Productos(04, 'sweater', 'img/sweater-diesel.jpeg', ['s, m, l,'], 'gray', 5850)
-// const p5 = new Productos(05, 'infinit', 'img/sweater-infinit-puntos.jpeg', ['s, m, l,'], 'gris', 6400 )
-// const p6 = new Productos(06, 'jack rayado','img/sweater-rayado-jack.jpg',['s, m, l,'], 'claro', 7000)
-
 // DECLARACIONES
-
-let allproductos = []
+let allProductos = []
 let Carrito = []
 
 fetch('../data/productos.json')
     .then((Response) => Response.json())
     .then((respuesta) =>{
-        respuesta = allproductos
+        // console.log('response: ',respuesta)
+        allProductos = respuesta
+        loadProductos(respuesta)
+        console.log(allProductos)
         guardarDatos()
     })
 // adicion de cartas desde el documento js
-
-const primersection = document.querySelector('.contenedor')
-allproductos.forEach((producto) =>{
-    const cadaproducto = document.createElement('div')
-    cadaproducto.innerHTML = `
+const loadProductos = (respuesta) =>{
+    console.log('load')
+    const primersection = document.querySelector('.contenedor')
+    respuesta.forEach((producto) =>{
+        const cadaproducto = document.createElement('div')
+        cadaproducto.innerHTML = `
         <figure>
         <img src= "${producto?.imagen}">
         </figure>
@@ -49,7 +32,8 @@ allproductos.forEach((producto) =>{
         cadaproducto.className = 'card'
         primersection.append(cadaproducto)
     })
-
+}
+    
     carritoProducto = () =>{
         const porcadaproducto = document.createElement('div')
         porcadaproducto.innerHTML = ``
@@ -99,10 +83,14 @@ allproductos.forEach((producto) =>{
 const guardarDatos = () =>{
     localStorage.setItem('suCompra', JSON.stringify(Carrito)) ? Carrito = JSON.parse(localStorage.getItem(Carrito)) : Carrito 
 carritoProducto()
+productoElegido()
+
 }
 const productoElegido = (evento) =>{
     const productoDatos = evento.target.getAttribute('data-id')
-    const laSeleccion = allproductos.find((producto) => producto.id == productoDatos)
+    console.log(evento)
+    const laSeleccion = allProductos.find((producto) => producto.id == productoDatos)
+    console.log(productoElegido.evento)
     if(laSeleccion){
             const { value: talle } = Swal.fire({
                 title: 'Por favor elije un talle',
@@ -147,7 +135,7 @@ const productoElegido = (evento) =>{
         console.log(Carrito)
     }
     }
-    const fotoMuestra = (imagen) =>{
+        const fotoMuestra = (imagen) =>{
         const imagenDato = imagen.target 
             Swal.fire({
             title: 'Sweet!',
@@ -164,14 +152,9 @@ const productoElegido = (evento) =>{
 
         })
         
-    
     btnCompra.forEach((boton) =>{
         boton.addEventListener('click', productoElegido )
     })
-    
-    const pantallaConDatos = () =>{
-    
-    }
     
     const valorCarrito = () =>{
         let valorCarrito = 0
