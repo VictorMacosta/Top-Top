@@ -173,7 +173,16 @@ body{
     display: flex;
     flex-direction: column;
     background-color: #2fb4cc;
-    border: solid 1px black;
+}
+li{
+    list-style: none;
+}
+.contengoBtn{
+    height: 100%;
+}
+.sacarDelCarrito{
+    width: 15px;
+    height: 100%;
 }
 .showdes ul{
     margin: 5px 5px;

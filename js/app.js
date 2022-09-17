@@ -7,90 +7,16 @@ let Carrito = []
 fetch('../data/productos.json')
     .then((Response) => Response.json())
     .then((respuesta) =>{
-        // console.log('response: ',respuesta)
         allProductos = respuesta
         loadProductos(respuesta)
         console.log(allProductos)
         guardarDatos()
-    })
-// adicion de cartas desde el documento js
-const loadProductos = (respuesta) =>{
-    console.log('load')
-    const primersection = document.querySelector('.contenedor')
-    respuesta.forEach((producto) =>{
-        const cadaproducto = document.createElement('div')
-        cadaproducto.innerHTML = `
-        <figure>
-        <img src= "${producto?.imagen}">
-        </figure>
-        <div class="contenido">
-        <h3>${producto?.nombre}</h3>
-        <p><spam>${producto?.precio}</spam></p>
-        <botton class ="btn" data-id ="${producto?.id}">comprar</botton>
-        </div>
-        `
-        cadaproducto.className = 'card'
-        primersection.append(cadaproducto)
-    })
-}
-    
-    carritoProducto = () =>{
-        const porcadaproducto = document.createElement('div')
-        porcadaproducto.innerHTML = ``
-        Carrito.forEach((producto)=>{
-            porcadaproducto.innerHTML = `
-            <figure class = "padreimg">
-                <img src="${producto.imagen}">
-            </figure>
-            <div class = "showdes">
-                <ul>
-                <li>${producto?.nombre}</li>
-                <li>${producto?.id}</li>
-                <li>${producto?.precio}</li>
-                </ul>
-            
-            </div>
-            
-            `
-            porcadaproducto.className = 'cardEnElCarrito'
-            modal.append(porcadaproducto)
-        })
-    }
+    });
 
-    const btnCompra = document.querySelectorAll('.btn')
-
-    const showImg = document.querySelectorAll('img')
-
-    const rederizarVentana = document.querySelector('.open')
-
-    const modalContainer = document.querySelector('.modalContainer')
-
-    const modal = document.querySelector('.modal')
-
-    const cierroVentana = document.querySelector('.close')
-
-    const examinarCarrito = document.querySelector('.buttonCarri')
-
-    rederizarVentana.addEventListener('click', () =>{
-        modalContainer.classList.add('show')
-    })
-    cierroVentana.addEventListener('click', () =>{
-        modalContainer.classList.remove('show')
-    })
-
-// FUNCIONES
-
-const guardarDatos = () =>{
-    localStorage.setItem('suCompra', JSON.stringify(Carrito)) ? Carrito = JSON.parse(localStorage.getItem(Carrito)) : Carrito 
-carritoProducto()
-productoElegido()
-
-}
-const productoElegido = (evento) =>{
+const productoElegido = (evento) =>
+{
     const productoDatos = evento.target.getAttribute('data-id')
-    console.log(evento)
     const laSeleccion = allProductos.find((producto) => producto.id == productoDatos)
-    console.log(productoElegido.evento)
     if(laSeleccion){
             const { value: talle } = Swal.fire({
                 title: 'Por favor elije un talle',
@@ -132,9 +58,102 @@ const productoElegido = (evento) =>{
         Carrito.push(laSeleccion)
         carritoProducto()
         // guardarDatos()
-        console.log(Carrito)
     }
+}
+// adicion de cartas desde el documento js
+const loadProductos = (respuesta) =>{
+    console.log('load')
+    const primersection = document.querySelector('.contenedor')
+    respuesta.forEach((producto) =>{
+        const cadaproducto = document.createElement('div')
+        cadaproducto.innerHTML = `
+        <figure>
+        <img src= "${producto?.imagen}">
+        </figure>
+        <div class="contenido">
+        <h3>${producto?.nombre}</h3>
+        <p><spam>${producto?.precio}</spam></p>
+        <botton class ="btn" data-id ="${producto?.id}">comprar</botton>
+        </div>
+        `
+        cadaproducto.className = 'card'
+        primersection.append(cadaproducto)
+    })
+    const btnCompra = document.querySelectorAll('.btn');
+    btnCompra.forEach((boton) =>{
+        boton.addEventListener('click', productoElegido )
+    });
+}
+    actualizarCarrito =()=>{
+        const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
+        cardEnElCarrito.innerHTML = ``
     }
+    const productoParaSacar = (respuesta) => {
+        const item = Carrito.find((id) => id === respuesta.id)
+        const indice = Carrito.indexOf(item)
+        Carrito.splice(indice, 1)
+        actualizarCarrito()
+        console.log(item)
+        console.log(indice)
+    }
+
+carritoProducto = () =>{
+    const porcadaproducto = document.createElement('div')
+    porcadaproducto.innerHTML = ``
+    Carrito.forEach((producto)=>{
+        porcadaproducto.innerHTML = `
+        <figure class = "padreimg">
+            <img src="${producto.imagen}">
+        </figure>
+        <div class = "showdes">
+            <ul>
+            <li>${producto?.nombre}</li>
+            <li>${producto?.id}</li>
+            <li>${producto?.precio}</li>
+            </ul>
+        </div>
+        <div class ="contengoBtn">
+        <button class="sacarDelCarrito">x</button>
+        </div>
+        `
+        porcadaproducto.className = 'cardEnElCarrito'
+        modal.append(porcadaproducto)
+    })
+    const eliminarProducto = document. querySelectorAll(".sacarDelCarrito")
+    eliminarProducto.forEach((boton)=>{
+        boton.addEventListener('click', productoParaSacar)
+    })
+
+}
+
+
+const showImg = document.querySelectorAll('img')
+
+const rederizarVentana = document.querySelector('.open')
+
+const modalContainer = document.querySelector('.modalContainer')
+
+const modal = document.querySelector('.modal')
+
+const cierroVentana = document.querySelector('.close')
+
+const examinarCarrito = document.querySelector('.buttonCarri')
+
+rederizarVentana.addEventListener('click', () =>{
+    modalContainer.classList.add('show')
+})
+cierroVentana.addEventListener('click', () =>{
+    modalContainer.classList.remove('show')
+})
+
+// FUNCIONES
+
+const guardarDatos = () =>
+{
+    localStorage.setItem('suCompra', JSON.stringify(Carrito)) ? Carrito = JSON.parse(localStorage.getItem(Carrito)) : Carrito 
+    carritoProducto()
+    // productoElegido()
+}
         const fotoMuestra = (imagen) =>{
         const imagenDato = imagen.target 
             Swal.fire({
@@ -152,10 +171,6 @@ const productoElegido = (evento) =>{
 
         })
         
-    btnCompra.forEach((boton) =>{
-        boton.addEventListener('click', productoElegido )
-    })
-    
     const valorCarrito = () =>{
         let valorCarrito = 0
         for(const producto of Carrito){
@@ -175,12 +190,5 @@ const productoElegido = (evento) =>{
 
 // aplicacion de liseners 
 
-
-    // alert('gracias por su compra su total es de $' + valorCarrito())
-    
-    // alert('te mostrare por consola los productos')
-    // Carrito.forEach(producto =>{
-    //     console.log(producto)
-    // })
     
     
