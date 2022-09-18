@@ -84,18 +84,15 @@ const loadProductos = (respuesta) =>{
         boton.addEventListener('click', productoElegido )
     });
 }
-    actualizarCarrito =()=>{
-        const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
-        cardEnElCarrito.innerHTML = ``
-    }
-    const productoParaSacar = (respuesta) => {
-        const item = Carrito.find((id) => id === respuesta.id)
-        const indice = Carrito.indexOf(item)
-        Carrito.splice(indice, 1)
-        actualizarCarrito()
-        console.log(item)
-        console.log(indice)
-    }
+
+    // const productoParaSacar = (respuesta) => {
+    //     const item = Carrito.find((id) => id === respuesta.id)
+    //     const indice = Carrito.indexOf(item)
+    //     Carrito.splice(indice, 1)
+    //     actualizarCarrito()
+    //     console.log(item)
+    //     console.log(indice)
+    // }
 
 carritoProducto = () =>{
     const porcadaproducto = document.createElement('div')
@@ -113,7 +110,7 @@ carritoProducto = () =>{
             </ul>
         </div>
         <div class ="contengoBtn">
-        <button class="sacarDelCarrito">x</button>
+        <button class="sacarDelCarrito" id="${producto.id}">x</button>
         </div>
         `
         porcadaproducto.className = 'cardEnElCarrito'
@@ -121,11 +118,20 @@ carritoProducto = () =>{
     })
     const eliminarProducto = document. querySelectorAll(".sacarDelCarrito")
     eliminarProducto.forEach((boton)=>{
-        boton.addEventListener('click', productoParaSacar)
+        boton.addEventListener('click', ()=>{
+            const item = Carrito.find((item) => item.id == boton.id)
+            const indice = Carrito.indexOf(item)
+            Carrito.splice(indice, 1)
+            actualizarCarrito()
+            console.log(Carrito)
+        })
     })
-
 }
-
+actualizarCarrito =()=>{
+    const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
+    cardEnElCarrito.innerHTML = ``
+}
+const precioDelCarrito = document.querySelectorAll('.precioDeCompra')
 
 const showImg = document.querySelectorAll('img')
 
