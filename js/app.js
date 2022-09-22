@@ -122,15 +122,16 @@ carritoProducto = () =>{
             const item = Carrito.find((item) => item.id == boton.id)
             const indice = Carrito.indexOf(item)
             Carrito.splice(indice, 1)
-            actualizarCarrito()
+            
+            // actualizarCarrito()
             console.log(Carrito)
         })
     })
 }
-actualizarCarrito =()=>{
-    const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
-    cardEnElCarrito.innerHTML = ``
-}
+// actualizarCarrito =()=>{
+//     const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
+//     cardEnElCarrito.innerHTML = ``
+// }
 const precioDelCarrito = document.querySelectorAll('.precioDeCompra')
 
 const showImg = document.querySelectorAll('img')
