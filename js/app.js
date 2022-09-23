@@ -40,21 +40,6 @@ const productoElegido = (evento) =>
                 })
                 }
             })
-            if (talle) {
-                Swal.fire(`You selected: ${talle}`)
-            }
-                // Swal.fire({
-                //     title: 'Cuantas quieres llevar?',
-                //     icon: 'question',
-                //     input: 'range',
-                //     inputLabel: 'cantidad',
-                //     inputAttributes: {
-                //     min: 1,
-                //     max: 10,
-                //     step: 1
-                //     },
-                //     inputValue: 1
-                // })
         Carrito.push(laSeleccion)
         carritoProducto()
         // guardarDatos()
@@ -85,18 +70,11 @@ const loadProductos = (respuesta) =>{
     });
 }
 
-    // const productoParaSacar = (respuesta) => {
-    //     const item = Carrito.find((id) => id === respuesta.id)
-    //     const indice = Carrito.indexOf(item)
-    //     Carrito.splice(indice, 1)
-    //     actualizarCarrito()
-    //     console.log(item)
-    //     console.log(indice)
-    // }
 
 carritoProducto = () =>{
     const porcadaproducto = document.createElement('div')
     porcadaproducto.innerHTML = ``
+    porcadaproducto.textContent = ``   
     Carrito.forEach((producto)=>{
         porcadaproducto.innerHTML = `
         <figure class = "padreimg">
@@ -115,6 +93,7 @@ carritoProducto = () =>{
         `
         porcadaproducto.className = 'cardEnElCarrito'
         modal.append(porcadaproducto)
+        console.log(Carrito)
     })
     const eliminarProducto = document. querySelectorAll(".sacarDelCarrito")
     eliminarProducto.forEach((boton)=>{
@@ -122,16 +101,13 @@ carritoProducto = () =>{
             const item = Carrito.find((item) => item.id == boton.id)
             const indice = Carrito.indexOf(item)
             Carrito.splice(indice, 1)
-            
-            // actualizarCarrito()
+            porcadaproducto.innerHTML= ``
+            carritoProducto()
             console.log(Carrito)
         })
     })
 }
-// actualizarCarrito =()=>{
-//     const cardEnElCarrito = document.querySelectorAll('.cardEnElCarrito')
-//     cardEnElCarrito.innerHTML = ``
-// }
+
 const precioDelCarrito = document.querySelectorAll('.precioDeCompra')
 
 const showImg = document.querySelectorAll('img')
