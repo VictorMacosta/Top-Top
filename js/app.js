@@ -70,7 +70,6 @@ const loadProductos = (respuesta) =>{
     });
 }
 
-
 carritoProducto = () =>{
     const porcadaproducto = document.createElement('div')
     porcadaproducto.innerHTML = ``
@@ -102,13 +101,10 @@ carritoProducto = () =>{
             const indice = Carrito.indexOf(item)
             Carrito.splice(indice, 1)
             porcadaproducto.innerHTML= ``
-            carritoProducto()
-            console.log(Carrito)
         })
     })
 }
 
-const precioDelCarrito = document.querySelectorAll('.precioDeCompra')
 
 const showImg = document.querySelectorAll('img')
 
@@ -122,46 +118,33 @@ const cierroVentana = document.querySelector('.close')
 
 const examinarCarrito = document.querySelector('.buttonCarri')
 
+const finalizarCompra = document.querySelector('.finalizarCompra')
+
 rederizarVentana.addEventListener('click', () =>{
     modalContainer.classList.add('show')
 })
 cierroVentana.addEventListener('click', () =>{
     modalContainer.classList.remove('show')
 })
+finalizarCompra.addEventListener('click',()=>{
+    Carrito.length 
+    // let count = 0
+    // for(const producto of Carrito){
+    //     count += producto.precio
+    // }
+    // return count
+    console.log(Carrito)
+    // console.log(count)
+})
 
 // FUNCIONES
 
-const guardarDatos = () =>
-{
+const guardarDatos = () =>{
     localStorage.setItem('suCompra', JSON.stringify(Carrito)) ? Carrito = JSON.parse(localStorage.getItem(Carrito)) : Carrito 
     carritoProducto()
-    // productoElegido()
 }
-        const fotoMuestra = (imagen) =>{
-        const imagenDato = imagen.target 
-            Swal.fire({
-            title: 'Sweet!',
-            text: 'Modal with a custom image.',
-            imageUrl: imagenDato,
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-            })
-        console.log(imagenDato)
-    }
-    showImg.forEach((foto)=>{
-        foto.addEventListener ('click', fotoMuestra)
 
-        })
         
-    const valorCarrito = () =>{
-        let valorCarrito = 0
-        for(const producto of Carrito){
-            valorCarrito += producto.precio
-        }
-        return valorCarrito
-    }
-    
     // agregando un storage de las compras 
 
     
